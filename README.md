@@ -1,8 +1,73 @@
-# 🔥 테오의 스프린트 15기 6조 Pick-Time Front-end
+# 🎁 Pick-Time | 피크 타임
+
+<br />
+
+<details>
+  <summary>목차</summary>
+  <ol>
+    <li><a href="#서비스-개요">서비스 개요</a></li>
+    <li><a href="#프로젝트-개요">프로젝트 개요</a></li> 
+    <li><a href="#Co-op-Conventions">협업 컨벤션</a></li>
+  </ol>
+</details>
+
+<br />
+
+<div align="center">
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/103870198/248772571-6a9ee427-93c4-4258-8f07-0f595115bc34.png"  width="241">
+        <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/103870198/248773889-526fd2e3-13cc-4820-af83-3c29b441e38f.png" width="241">
+</div>
+
+무엇이든 담아서
+당신의 소중한 사람에게 마음을 전하세요!
 
 <br>
 
-## 👨‍👩‍👦‍👦 조원
+피크 타임 서비스의 궁극적인 목적은
+
+선물 고민을 해소하고, 받는 사람이 직접 원하는 선물을 선택할 수 있도록 하는 것입니다.
+
+이 서비스는 선물을 주고 싶은 사람들이 피크 타임 플랫폼을 통해 선물 아이템을 모아두고 링크를 공유하면, 받는 사람은 그 중에서 마음에 드는 것을 선택하고 주문할 수 있습니다.
+
+이를 통해 선물 고민과 번거로움을 줄이고, 받는 사람이 만족하는 선물을 선정할 수 있는 서비스입니다.
+
+## 서비스 개요
+
+### 우리가 생각하는 궁극적인 목적
+
+- 닝겐미키: `선물 보내는 사람과 받는 사람이 선물에 대한 부담을 덜어주는 서비스`
+- 다모: `받는 사람이 가지고 싶은것을 주는것이 아닌 상대방을 생각하고 선물을 골랐다는 부분이 다른 서비스 대비 차별점일것 같아요`
+- 마크: `선물 선택의 폭을 넓혀 원하지 않는 상품을 선물로 받는 것을 방지할 수 있을 것 같아요`
+- 마로: `주는 사람과 받는 사람의 고민과 시간을 덜어주는게 궁극적인 목적 아닐까요`
+- 엘라 : `카카오톡 선물하기에 없는 선물을 받고 싶어요`
+- 코마: `선물을 골라주는 사람의 고민과 부담을 덜어줄 수 있어요`
+- 토마토: `선물 고민을 해소하고, 받는 사람이 직접 원하는 선물을 선택할 수 있도록 하는 것입니다. `
+- 타몽: `상대에게 전하는 마음에서 번거로움과 속물적인 부분을 덜어내고 마음의 진정성을 정성을 통해 전달한다!`
+
+### 취지
+
+- 기존 서비스 되고 있는 위시리스트는 선물을 받고 싶은 사람의 취향만 알 수 있다.
+- 선물을 주는 사람의 정성을
+- 이 서비스는 선물을 주고싶어하는 사람의 마음을 담아 받는 사람에게 링크를 공유할 수 있게 했다.
+- 선물 보내는 사람과 받는 사람의 부담을 덜어줄 수 있다.
+
+### 대상
+
+- 카카오톡에는 없는 선물을 하고 싶어요
+- 받는 사람이 가지고 싶은 것을 고르는 것이 아닌, 상대방을 생각하며 선물을 고민하고 싶어요
+
+### 고민의 방향성
+
+<!-- 피그잼 이미지 캡쳐 넣어주세요 -->
+<img width="1148" alt="image" src="https://github.com/pick-time/pick-time-fe/assets/92101831/aa41af95-059c-447e-90ad-24165e53bab3">
+
+### 페이지 구상
+
+<img width="1100" alt="image" src="https://github.com/pick-time/pick-time-fe/assets/92101831/27ab50ce-dac3-418c-a7c0-95e981b38f2d">
+
+## 프로젝트 개요
+
+### 👨‍👩‍👦‍👦 조원
 
 - [닝겐미키-Designer👩🏻‍💻]()
 - [다모-Back-end](https://github.com/comody)
@@ -13,13 +78,12 @@
 - [토마토-Back-end](https://github.com/devmtn30)
 - [타몽-Front-end](https://github.com/blcklamb)
 
-<br>
-
-## 🏃🏽‍♀️🏃‍♂️ Kick-off
+### 🏃🏽‍♀️🏃‍♂️ Kick-off
 
 2023.06.21 20:30pm(KST)
 
 <br />
+
 <hr />
 
 ## Quick Start
@@ -32,6 +96,8 @@
 
 ## Stack
 
+[![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1687775980974?alt=media&token=a3a4a294-96da-4ef5-8f8c-a8abaf3fa751)](https://github.com/msdio/stackticon)
+
 - 코어: `React`, `TypeScript`, `CRA`
 - 상태관리: `Recoil`, `@tanstack/react-query`
 - 스타일링: `styled-components`
@@ -39,7 +105,9 @@
 
 <br />
 
-## Folder Structure
+## Co-op Conventions
+
+### Folder Structure
 
 ```
 |-- components (Element UI 컴포넌트를 정의합니다.)
@@ -55,10 +123,6 @@
   |-- intro.tsx -> /intro
   |-- Gift.tsx -> /gift
 ```
-
-<br />
-
-## Co-op Conventions
 
 <br />
 
