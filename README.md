@@ -15,11 +15,22 @@
 
 <div align="center">
     <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/103870198/248772571-6a9ee427-93c4-4258-8f07-0f595115bc34.png"  width="241">
-        <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/103870198/248773889-526fd2e3-13cc-4820-af83-3c29b441e38f.png" width="241">
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/103870198/248773889-526fd2e3-13cc-4820-af83-3c29b441e38f.png" width="241">
+    <br />
+    <img src="https://github.com/pick-time/pick-time-fe/assets/103870198/573cbe95-7967-4c12-84d9-4907d4d19531" width="241">
+    <img src="https://github.com/pick-time/pick-time-fe/assets/103870198/63746ab6-dc0c-482b-bab8-30fb11a723b0" width="241">
+    <br />
+    <img src=https://github.com/pick-time/pick-time-fe/assets/103870198/dad95725-2c3a-4993-82fa-7ab4b27429d0 width="241">
+    <img src="https://github.com/pick-time/pick-time-fe/assets/103870198/2dc2d984-24bc-4b6b-961e-8f9d365467af" width="241">
+
 </div>
 
+<br />
+
+<h2>
 무엇이든 담아서
 당신의 소중한 사람에게 마음을 전하세요!
+</h2>
 
 <br>
 
