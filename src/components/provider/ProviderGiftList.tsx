@@ -7,6 +7,7 @@ import EditGiftModal from "./EditGiftModal";
 import Button from "components/common/Button";
 import COLOR from "style/color";
 import giftList from "data/giftData";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface ResponseData {
   title: string;
@@ -16,6 +17,8 @@ interface ResponseData {
 }
 
 export default function ProviderGiftList() {
+  const navigate = useNavigate();
+  const { targetId } = useParams();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [response, setResponse] =
     useRecoilState<ResponseData>(urlResponseState);
@@ -31,6 +34,12 @@ export default function ProviderGiftList() {
 
   const handleEdit = (giftId: number) => {
     setOpenEditModal(giftId);
+  };
+
+  const handleClick = () => {
+    console.log(targetId);
+
+    navigate(`/result/${13}`);
   };
 
   useEffect(() => {
@@ -62,7 +71,7 @@ export default function ProviderGiftList() {
         text="작성 완료하기"
         color={COLOR.PINK}
         width="full"
-        // onClick={handleClick}
+        onClick={handleClick}
       />
       {openEditModal && (
         <EditGiftModal

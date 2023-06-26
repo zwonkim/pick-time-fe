@@ -42,14 +42,18 @@ function ConsumerIntro() {
           />
         </ImageWrapper>
         <TextWrapper>
-          <Text contents={data?.cardMeesage ?? ""} />
+          <Text contents={data?.cardMeesage ?? "취업 축하해 타몽~!"} />
         </TextWrapper>
       </CardWrapper>
       <TextWrapper>
         <Text
           fontSize="1.8rem"
           fontWeight={700}
-          contents={`${data?.providerName}님의 마음이 도착했어요! \n 정성스럽게 모은 선물 목록에서 \n 원하는 것을 골라주세요!`}
+          contents={`${
+            !data?.providerName
+              ? "익명"
+              : "님의 마음이 도착했어요! \n 정성스럽게 모은 선물 목록에서 \n 원하는 것을 골라주세요!"
+          }`}
         />
       </TextWrapper>
       <Spacing />
