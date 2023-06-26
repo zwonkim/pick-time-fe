@@ -18,7 +18,7 @@ export default async function fetchTodos(): Promise<Todos[]> {
 export async function postScrapeMetaData(url: string) {
   const res = await axios({
     // url: "http://localhost:5151/scrape",
-    url: "https://port-0-pick-time-express-7xwyjq992lljchlygq.sel4.cloudtype.app:5151/scrape",
+    url: "https://port-0-pick-time-express-7xwyjq992lljchlygq.sel4.cloudtype.app/scrape",
     method: "post",
     data: {
       url,
