@@ -16,6 +16,7 @@ export default async function fetchTodos(): Promise<Todos[]> {
 
 export async function postScrapeMetaData(url: string) {
   const res = await axios({
+    // url: "http://localhost:8080/scrape",
     // url: "http://localhost:5151/scrape",
     // url: "https://political-olive-radio.glitch.me/scrape",
     url: "/scrape", // 이거다!

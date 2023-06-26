@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { urlResponseState } from "stores/atom";
 import validateUrl from "utils/validateUrl";
 import { postScrapeMetaData } from "api/api";
+import COLOR from "style/color";
 
 export default function ProviderGiftForm() {
   const [url, setUrl] = useState<string>("");
@@ -22,8 +23,8 @@ export default function ProviderGiftForm() {
     event.preventDefault();
 
     const onSuccess = async () => {
+      setUrlError(validateUrl(url));
       if (validateUrl(url)) return;
-      // 에러메시지 함수 추가
 
       // input창 리셋
       inputRef.current!.value = "";
@@ -58,7 +59,7 @@ export default function ProviderGiftForm() {
 }
 
 const Form = styled.form`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 `;
 const Input = styled.input`
   width: 25rem;
@@ -87,6 +88,7 @@ const AddBtn = styled.button`
 `;
 
 const ErrorMsg = styled.p`
-  margin-top: 8px;
-  font-size: 14px;
+  margin: 0.5rem 0;
+  color: ${COLOR.PINK};
+  text-align: center;
 `;
