@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
@@ -6,6 +8,9 @@ import List from "components/common/List";
 import { GiftList } from "types/giftList.type";
 import EditGiftModal from "./EditGiftModal";
 import giftList from "data/giftData";
+
+import { useNavigate, useParams } from "react-router-dom";
+import mockCouponList from "data/couponData";
 
 interface ResponseData {
   title: string;
@@ -60,7 +65,11 @@ export default function ProviderGiftList() {
       <Title>상품 리스트</Title>
       {listData && (
         <List
+          // TODO: listData 삭제
           listData={listData}
+          giftList={listData}
+          // TODO: 실데이터로 교체
+          couponList={mockCouponList}
           type="editable"
           onClickClose={handleDelete}
           onClickEdit={handleEdit}
