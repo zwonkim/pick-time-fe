@@ -1,50 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { useGETGiftList, useGETPickedGift, usePOSTPickedGift } from "api/api";
+import { useGetResult, usePostPickFinal } from "hooks/queries/useResult";
 
 import Button from "components/common/Button";
 import Header from "components/common/Header";
 import Loading from "components/common/Loading";
 import Title from "components/common/Title";
+
 import ConsumerGiftList from "components/consumer/ConsumerGiftList";
 
 import COLOR from "style/color";
 import styled from "styled-components";
 
-import mockConsumerResult, { ConsumerResult } from "data/consumerResultData";
-
-const IS_MOCK = false;
+import { getGiftAndCouponIds, pickRandomId } from "utils/randomUtils";
 
 function GiftForConsumer() {
   const { targetId } = useParams() as { targetId: string };
   const navigate = useNavigate();
 
-  // TODO: GET 인지 POST 인지 확인
-  // const { mutate, isSuccess } = usePOSTPickedGift();
+  const [pickedFinalId, setPickedFinalId] = useState<number>(0);
+  const [isPickedAndSend, setIsPickedAndSend] = useState<boolean>(false);
+  const [isRandom, setIsRandom] = useState<boolean>(false);
 
-  // MOCK DATA 처리
-  const {
-    providerName: MOCK_PROVIDER,
-    consumerName: MOCK_CONSUMER,
-    couponList: MOCK_COUPONLIST,
-    giftList: MOCK_GIFTLIST,
-  }: ConsumerResult = mockConsumerResult;
+  const { data, isLoading: isGetGiftListLoading } = useGetResult({
+    id: parseInt(targetId, 10),
+  });
+
+  const { refetch, isLoading: isPickedLoading } = usePostPickFinal({
+    targetId: parseInt(targetId, 10),
+    giftId: pickedFinalId,
+    isPickedAndSend,
+  });
 
   const onClickRandomButton = () => {
-    alert("준비 중인 기능입니다.");
-    // navigate(`/target/${targetId}/gift/random`);
+    if (!data) return;
+    setIsRandom(true);
+    const giftAndCouponIdArray = getGiftAndCouponIds(
+      data.giftList,
+      data.couponList,
+    );
+
+    const randomId = pickRandomId(giftAndCouponIdArray);
+    setPickedFinalId(randomId);
+    setIsRandom(false);
+
+    setTimeout(() => {
+      navigate(`/random/${targetId}/gift`, { state: giftAndCouponIdArray });
+    }, 100);
   };
 
-  const [pickedGiftId, setPickedGiftId] = useState<number>(0);
-  const [isPickedAndSend, setIsPickedAndSend] = useState<boolean>(false);
-
   const onClickPickButton = () => {
-    // mutate({
-    //   targetId: parseInt(targetId || "", 10),
-    //   giftId: pickedGiftId,
-    // });
     setIsPickedAndSend(true);
     refetch();
     setTimeout(() => {
@@ -52,14 +57,11 @@ function GiftForConsumer() {
     }, 100);
   };
 
-  const { data, isLoading: isGetGiftListLoading } = useGETGiftList({
-    id: parseInt(targetId, 10),
-  });
-  const { refetch, isLoading: isPickedLoading } = useGETPickedGift({
-    targetId: parseInt(targetId, 10),
-    giftId: pickedGiftId,
-    isPickedAndSend,
-  });
+  useEffect(() => {
+    if (isRandom && pickedFinalId) {
+      refetch();
+    }
+  }, [isPickedAndSend, pickedFinalId]);
 
   const loading = isGetGiftListLoading || isPickedLoading;
 
@@ -71,21 +73,19 @@ function GiftForConsumer() {
         <>
           <TitleWrapper>
             <Title level={1} align="left">
-              {IS_MOCK ? MOCK_PROVIDER : data?.providerName}
+              {data?.providerName}
               님이
               <br />
-              <TitleSpan>
-                {IS_MOCK ? MOCK_CONSUMER : data?.consumerName}
-              </TitleSpan>
+              <TitleSpan>{data?.consumerName}</TitleSpan>
               님을 위해
               <br />
               생각한 선물들이에요!
             </Title>
           </TitleWrapper>
           <ConsumerGiftList
-            onSelectGift={(id: number) => setPickedGiftId(id)}
-            couponList={IS_MOCK ? MOCK_COUPONLIST : data?.couponList}
-            giftList={IS_MOCK ? MOCK_GIFTLIST : data?.giftList}
+            onSelectGift={(id: number) => setPickedFinalId(id)}
+            couponList={data?.couponList}
+            giftList={data?.giftList}
           />
         </>
       )}
@@ -97,7 +97,7 @@ function GiftForConsumer() {
           onClick={onClickRandomButton}
         />
         <Button
-          isDisabled={pickedGiftId === 0}
+          isDisabled={pickedFinalId === 0}
           text="다 골랐어요!"
           color={COLOR.PURPLE}
           width="full"
