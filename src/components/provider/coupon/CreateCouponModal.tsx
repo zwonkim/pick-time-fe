@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import ModalFrameCoupon from "components/common/ModalFrameCoupon";
 import Text from "components/common/Text";
 import styled from "styled-components";
@@ -14,8 +13,8 @@ import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
 import { useCallback, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import Loading from "components/common/Loading";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import useCoupon from "hooks/queries/useCoupon";
 
 const BASIC_IMAGE_GRADIENT = [
   "linear-gradient(133deg, #52ccff 0%, #5448e8 100%)",
@@ -48,28 +47,24 @@ function CreateCouponModal({ setCloseCouponModal }: CreateCouponModalProps) {
   const onChangeCouponMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCouponMessage(e.target.value);
   };
+  const { addCoupon } = useCoupon(Number(targetId));
 
-  // TODO: mutate로 custom hook 분리 예정
   const onClickSubmit = async (png: string) => {
     const formData = new FormData();
-    formData.append("file", png);
-    try {
-      if (targetId) {
-        const params = new URLSearchParams({ targetId }).toString();
-        await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/coupon?${params}`,
-          { formData },
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              charset: "utf-8",
-            },
-          },
-        );
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    const randomId = (): string => {
+      const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
+      return uint32.toString(16);
+    };
+    await fetch(png)
+      .then(res => res.blob())
+      .then(blob => {
+        const file = new File([blob], `custom-coupon-${randomId()}.png`, {
+          type: "image/png",
+        });
+        formData.append("file", file);
+      });
+
+    addCoupon.mutate({ couponForm: formData, targetId: Number(targetId) });
   };
 
   const onClickCouponToPNG = useCallback(async () => {
@@ -91,10 +86,12 @@ function CreateCouponModal({ setCloseCouponModal }: CreateCouponModalProps) {
 
   const onClickImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
       const imageUrl = URL.createObjectURL(file);
+
       setBackImageCustomURL(imageUrl); // 이미지 화면에 렌더링 하기
       setInputInfo({ ...inputInfo, file }); // 전역 상태에 저장
     }
@@ -127,7 +124,7 @@ function CreateCouponModal({ setCloseCouponModal }: CreateCouponModalProps) {
         {BASIC_IMAGE_GRADIENT.map((basic, idx) => {
           return (
             <BasicImage
-              key={idx}
+              key={BASIC_IMAGE_GRADIENT[idx]}
               background={basic}
               onClick={() => setBackImageURL(basic)}
             />
